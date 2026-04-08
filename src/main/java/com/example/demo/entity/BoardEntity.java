@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.dto.Boarddto;
+import com.example.demo.dto.BoardDTO;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -30,13 +30,18 @@ public class BoardEntity extends BaseTimeEntity {
     @Column
     private int boardHits;
 
-    public static BoardEntity toSaveEntity(Boarddto boarddto) {
+    public static BoardEntity toSaveEntity(BoardDTO boardDTO) {
         BoardEntity boardEntity = new BoardEntity();
-        boardEntity.boardWriter = boarddto.getBoardWriter();
-        boardEntity.boardPass = boarddto.getBoardPass();
-        boardEntity.boardTitle = boarddto.getBoardTitle();
-        boardEntity.boardContents = boarddto.getBoardContents();
-        boardEntity.boardHits=0;
-        return  boardEntity;
+        boardEntity.boardWriter = boardDTO.getBoardWriter();
+        boardEntity.boardPass = boardDTO.getBoardPass();
+        boardEntity.boardTitle = boardDTO.getBoardTitle();
+        boardEntity.boardContents = boardDTO.getBoardContents();
+        boardEntity.boardHits = 0;
+        return boardEntity;
+    }
+
+    public void update(BoardDTO boardDTO) {
+        this.boardTitle = boardDTO.getBoardTitle();
+        this.boardContents = boardDTO.getBoardContents();
     }
 }
